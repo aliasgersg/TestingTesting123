@@ -27,7 +27,7 @@ class UniqueCollectionTest {
         collection.addItem(Item("item1"))
         collection.addItem(Item("Item2"))
 
-        assert (collection.size() == 2)
+        assert(collection.size() == 2)
     }
 
     @Test
@@ -39,6 +39,24 @@ class UniqueCollectionTest {
         collection.clear()
         val newSize = collection.size();
 
-        assert(originalSize == 2 && newSize == 0) {"Items not cleared"}
+        assert(originalSize == 2 && newSize == 0) { "Items not cleared" }
+    }
+
+    @Test
+    fun removeAllItems() {
+        collection.addItem(Item("item1"))
+        collection.addItem(Item("Item2"))
+        collection.addItem(Item("item3"))
+
+        val originalSize = collection.size()
+        collection.remove(Item("item2")) // Remove an item
+
+        val newSize = collection.size()
+        val isItem2Present = collection.get(0).name.equals("item2", ignoreCase = true) ||
+                collection.get(1).name.equals("item2", ignoreCase = true)
+
+        assertTrue("Size did not decrease after removal", originalSize - newSize == 2)
+        assertFalse("Item 'item2' was not removed", isItem2Present)
     }
 }
+// identify and create tests for certain artifacts in the assignemnt 10 video, youre not supposed to test activites, things like book list or book, TEST FOR PART THAT CALCULATES HOW FAR IT REWINDS
